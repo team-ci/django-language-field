@@ -5,10 +5,10 @@ class LanguageField(CharField):
     """
     A language field for Django models.
     """
-    def __init__(self, *args, db_collation=None, **kwargs):
+    def __init__(self, *args, **kwargs):
         # Local import so the languages aren't loaded unless they are needed.
         from .languages import LANGUAGES
-
+        self.db_collation = False
         kwargs.setdefault('max_length', 3)
         kwargs.setdefault('choices', LANGUAGES)
-        super(CharField, self).__init__(*args, db_collation, **kwargs)
+        super().__init__(*args, **kwargs)
